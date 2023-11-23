@@ -1,6 +1,10 @@
 <template>
+  <a-calendar v-model="value" />
+  select: {{ value }}
+
   <nav>
-    <router-link to="/">Home</router-link> |
+    <router-link to="/">Home</router-link>
+    |
     <router-link to="/about">About</router-link>
   </nav>
   <router-view />
