@@ -1,10 +1,5 @@
 <template>
-  <a-row
-    id="GloableHeader"
-    class="grid-demo"
-    style="margin-bottom: 16px"
-    align="center"
-  >
+  <a-row id="GloableHeader" class="grid-demo" align="center" :wrap="false">
     <a-col flex="auto">
       <a-menu
         mode="horizontal"
@@ -33,7 +28,7 @@
             </div>
           </div>
         </a-menu-item>
-        <a-menu-item v-for="item in routes" :key="item.path">
+        <a-menu-item v-for="item in visibleRoutes" :key="item.path">
           {{ item.name }}
         </a-menu-item>
       </a-menu>
@@ -49,11 +44,27 @@
 <script setup lang="ts">
 import { routes } from "@/router/routes";
 import { useRouter } from "vue-router";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
+import checkAcess from "@/access/checkAcess";
+import ACCESS_ENUM from "@/access/accessEnum";
 
 // 使用 vueRouter 实现路由跳转
 const router = useRouter();
+const store = useStore();
+// 路由过滤
+const visibleRoutes = computed(() => {
+  return routes.filter((item, index) => {
+    if (item.meta?.hideInMenu) {
+      return false;
+    }
+    // 加上用户权限的逻辑
+    if (!checkAcess(store.state.user.loginUser, item?.meta?.access as string)) {
+      return false;
+    }
+    return true;
+  });
+});
 
 // 定义响应变量为默认主页
 const selectedKeys = ref(["/"]);
@@ -68,13 +79,10 @@ const doMenuClick = (key: string) => {
   });
 };
 
-const store = useStore();
-console.log();
-
 setTimeout(() => {
   store.dispatch("user/getLoginUser", {
     userName: "CSGUIDER",
-    role: "admin",
+    userRole: ACCESS_ENUM.ADMIN,
   });
 }, 3000);
 </script>

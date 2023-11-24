@@ -1,5 +1,5 @@
 import { createStore } from "vuex";
-import user from "./user";
+import user from "@/store/user";
 
 export default createStore({
   mutations: {},

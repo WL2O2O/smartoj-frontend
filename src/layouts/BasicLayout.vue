@@ -1,6 +1,6 @@
 <template>
   <div id="basicLayout">
-    <a-layout style="height: 400px">
+    <a-layout style="min-height: 100vh">
       <a-layout-header class="header">
         <GloableHeader />
       </a-layout-header>
@@ -24,13 +24,16 @@
 }
 
 .content {
+  padding: 20px;
+  margin-bottom: 15px;
+  background: linear-gradient(to right, #bbb, #fff);
 }
 
 .footer {
   left: 0;
   right: 0;
   bottom: 0;
-  position: absolute;
+  position: fixed;
   padding: 15px;
   text-align: center;
   background: #efefef;
