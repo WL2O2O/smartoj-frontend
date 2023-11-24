@@ -10,7 +10,6 @@ export default {
       userRole: "notLogin",
     },
   }),
-
   // actions--修改变量
   actions: {
     getLoginUser({ commit, state }, payload) {
@@ -18,7 +17,6 @@ export default {
       commit("updateUser", payload);
     },
   },
-
   // mutations--定义对变量更新的方法
   mutations: {
     updateUser(state, payload) {

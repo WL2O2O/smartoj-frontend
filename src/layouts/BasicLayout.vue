@@ -9,7 +9,7 @@
       </a-layout-content>
       <a-layout-footer class="footer">
         <a href="https://wlei224.gitee.io" target="_blank">
-          <a-layout-footer> SmartOJ By CSGUIDER</a-layout-footer>
+          SmartOJ By CSGUIDER
         </a>
       </a-layout-footer>
     </a-layout>

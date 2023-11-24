@@ -88,6 +88,10 @@ setTimeout(() => {
 </script>
 
 <style scoped>
+#GloableHeader {
+  color: #000000;
+}
+
 .title-bar {
   display: flex;
   text-align: center;
