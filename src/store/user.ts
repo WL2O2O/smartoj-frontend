@@ -12,7 +12,7 @@ export default {
   }),
   // actions--修改变量
   actions: {
-    getLoginUser({ commit, state }, payload) {
+    async getLoginUser({ commit, state }, payload) {
       // TODO 实际业务要改为从远程获取登录用户
       commit("updateUser", payload);
     },
