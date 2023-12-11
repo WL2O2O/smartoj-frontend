@@ -24,9 +24,9 @@
 }
 
 .content {
-  padding: 20px;
+  background: linear-gradient(to right, #fefefe, #fff);
   margin-bottom: 15px;
-  background: linear-gradient(to right, #bbb, #fff);
+  padding: 20px;
 }
 
 .footer {

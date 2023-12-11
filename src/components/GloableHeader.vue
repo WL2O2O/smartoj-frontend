@@ -18,7 +18,7 @@
               class="title"
               :style="{
                 width: '80px',
-                height: '30px',
+                height: '40px',
                 background: 'var(--color-fill-3)',
                 cursor: 'text',
                 borderRadius: '4px',
@@ -103,6 +103,7 @@ const doMenuClick = (key: string) => {
 }
 
 .title {
+  line-height: 40px;
   margin-left: 8px;
   color: #00a54a;
 }
