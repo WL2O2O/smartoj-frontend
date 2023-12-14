@@ -7,13 +7,14 @@
       :pagination="{
         showTotal: true,
         pageSize: searchParams.pageSize,
-        current: searchParams.pageNum,
+        current: searchParams.current,
         total,
       }"
+      @page-change="onPageChange"
     >
       <template #optional="{ record }">
         <a-space>
-          <a-button type="primary" @click="doUpdate(record)"> 修改</a-button>
+          <a-button type="primary" @click="doUpdate(record)">修改</a-button>
           <a-button status="danger" @click="doDelete(record)">删除</a-button>
         </a-space>
       </template>
@@ -22,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watchEffect } from "vue";
 import {
   Page_Question_,
   Question,
@@ -39,7 +40,7 @@ const dataList = ref([]);
 const total = ref(0);
 const searchParams = ref({
   pageSize: 10,
-  pageNum: 1,
+  current: 1,
 });
 
 const loadData = async () => {
@@ -52,6 +53,20 @@ const loadData = async () => {
   } else {
     message.error("加载失败，" + res.message);
   }
+};
+
+/**
+ * 监听 searchParams 中的数据，发生变化重新加载页面
+ */
+watchEffect(() => {
+  loadData();
+});
+
+const onPageChange = (page: number) => {
+  searchParams.value = {
+    ...searchParams.value,
+    current: page,
+  };
 };
 
 /**
