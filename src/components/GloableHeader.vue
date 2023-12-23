@@ -104,7 +104,7 @@ const doMenuClick = (key: string) => {
 
 .title {
   line-height: 40px;
-  margin-left: 8px;
   color: #00a54a;
+  margin: auto 8px;
 }
 </style>
