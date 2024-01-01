@@ -38,13 +38,13 @@ questionSubmitAddRequest: QuestionSubmitAddRequest,
 
     /**
      * @deprecated
-     * listQuestionByPage
+     * listQuestionSubmitByPage
      * @param questionSubmitQueryRequest questionSubmitQueryRequest
      * @returns BaseResponse_Page_QuestionSubmitVO_ OK
      * @returns any Created
      * @throws ApiError
      */
-    public static listQuestionByPageUsingPost2(
+    public static listQuestionSubmitByPageUsingPost1(
 questionSubmitQueryRequest: QuestionSubmitQueryRequest,
 ): CancelablePromise<BaseResponse_Page_QuestionSubmitVO_ | any> {
         return __request(OpenAPI, {

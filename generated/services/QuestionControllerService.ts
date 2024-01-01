@@ -224,13 +224,13 @@ questionSubmitAddRequest: QuestionSubmitAddRequest,
     }
 
     /**
-     * listQuestionByPage
+     * listQuestionSubmitByPage
      * @param questionSubmitQueryRequest questionSubmitQueryRequest
      * @returns BaseResponse_Page_QuestionSubmitVO_ OK
      * @returns any Created
      * @throws ApiError
      */
-    public static listQuestionByPageUsingPost1(
+    public static listQuestionSubmitByPageUsingPost(
 questionSubmitQueryRequest: QuestionSubmitQueryRequest,
 ): CancelablePromise<BaseResponse_Page_QuestionSubmitVO_ | any> {
         return __request(OpenAPI, {
