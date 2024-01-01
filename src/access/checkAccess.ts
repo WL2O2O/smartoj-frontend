@@ -7,7 +7,7 @@
 
 import ACCESS_ENUM from "@/access/accessEnum";
 
-const checkAcess = (loginUser: any, needAcess = ACCESS_ENUM.NOT_LOGIN) => {
+const checkAccess = (loginUser: any, needAcess = ACCESS_ENUM.NOT_LOGIN) => {
   // 获取当前用户具有的权限
   const loginUserAcess = loginUser?.userRole ?? ACCESS_ENUM.NOT_LOGIN;
   // 如果是不需要登录，直接返回true
@@ -29,4 +29,4 @@ const checkAcess = (loginUser: any, needAcess = ACCESS_ENUM.NOT_LOGIN) => {
   }
   return true;
 };
-export default checkAcess;
+export default checkAccess;

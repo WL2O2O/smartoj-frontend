@@ -46,7 +46,7 @@ import { routes } from "@/router/routes";
 import { useRouter } from "vue-router";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
-import checkAcess from "@/access/checkAcess";
+import checkAccess from "@/access/checkAccess";
 import ACCESS_ENUM from "@/access/accessEnum";
 
 // 使用 vueRouter 实现路由跳转
@@ -59,7 +59,9 @@ const visibleRoutes = computed(() => {
       return false;
     }
     // 加上用户权限的逻辑
-    if (!checkAcess(store.state.user.loginUser, item?.meta?.access as string)) {
+    if (
+      !checkAccess(store.state.user.loginUser, item?.meta?.access as string)
+    ) {
       return false;
     }
     return true;
