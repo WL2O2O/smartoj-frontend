@@ -12,6 +12,11 @@ import UserManageView from "@/views/user/UserManageView.vue";
 import UserInfoView from "@/views/user/UserInfoView.vue";
 
 import ACCESS_ENUM from "@/access/accessEnum";
+import { Icon } from "@arco-design/web-vue";
+
+const IconFont = Icon.addFromIconFontCn({
+  src: "https://at.alicdn.com/t/c/font_4402305_lgw67nim0j.js",
+});
 
 export const routes: Array<RouteRecordRaw> = [
   {

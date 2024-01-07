@@ -38,12 +38,42 @@
             </div>
           </div>
         </a-menu-item>
-        <a-menu-item v-for="item in visibleRoutes" :key="item.path">
-          {{ item.name }}
+        <a-menu-item key="/">
+          <icon-font type="icon-coding" :size="14" />
+          <a style="margin-left: 0">题库</a>
         </a-menu-item>
+        <a-menu-item key="/questions_submit">
+          <icon-font type="icon-sjkb" :size="14" />
+          <a style="margin-left: 0">数据看板</a>
+        </a-menu-item>
+        <a-menu-item key="/manage/question">
+          <icon-font type="icon-stgl" :size="14" />
+          <a style="margin-left: 0">题目管理</a>
+        </a-menu-item>
+        <a-menu-item key="/manage/user">
+          <icon-font type="icon-jsgl" :size="14" />
+          <a style="margin-left: 0">用户管理</a>
+        </a-menu-item>
+        <!--        <a-menu-item :key="item.path">-->
+        <!--            <icon-font type="icon-coding" :size="14" />-->
+        <!--            -->
+        <!--          </div>-->
+        <!--          <div v-if="item.name === '提交总览'">-->
+        <!--            <icon-font type="icon-coding" :size="14" />-->
+        <!--            {{ item.name }}-->
+        <!--          </div>-->
+        <!--          <div v-if="item.name === '管理题目'">-->
+        <!--            <icon-font type="icon-coding" :size="14" />-->
+        <!--            {{ item.name }}-->
+        <!--          </div>-->
+        <!--          <div v-if="item.name === '用户管理'">-->
+        <!--            <icon-font type="icon-coding" :size="14" />-->
+        <!--            {{ item.name }}-->
+        <!--          </div>-->
+        <!--        </a-menu-item>-->
       </a-menu>
     </a-col>
-    <div id="userInfoView" style="margin-right: 20px">
+    <div id="userInfoView" style="margin-right: 30px">
       <a-dropdown trigger="hover">
         <a-avatar shape="square" style="background-color: #3370ff">
           {{ store.state.user?.loginUser?.userName ?? "未登录" }}
@@ -52,9 +82,12 @@
           <a-doption v-if="!isLoggedIn" @click="login">登 录</a-doption>
         </template>
         <template #content v-else>
-          <a-doption @click="setting">个人信息</a-doption>
-          <a-doption @click="logout">退 出</a-doption>
-          <!--          <a-doption @click="">预留判题API</a-doption>-->
+          <a-doption @click="setting"
+            ><icon-font type="icon-wode" :size="14" /> 我的</a-doption
+          >
+          <a-doption @click="logout"
+            ><icon-font type="icon-tuichu" :size="15" /> 退出</a-doption
+          >
         </template>
       </a-dropdown>
     </div>
@@ -135,6 +168,11 @@ const setting = () => {
 //     userRole: ACCESS_ENUM.ADMIN,
 //   });
 // }, 3000);
+import { Icon } from "@arco-design/web-vue";
+
+const IconFont = Icon.addFromIconFontCn({
+  src: "https://at.alicdn.com/t/c/font_4402305_lgw67nim0j.js",
+});
 </script>
 
 <style scoped>
