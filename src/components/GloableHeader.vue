@@ -46,11 +46,17 @@
           <icon-font type="icon-sjkb" :size="14" />
           <a style="margin-left: 0">数据看板</a>
         </a-menu-item>
-        <a-menu-item key="/manage/question">
+        <a-menu-item
+          key="/manage/question"
+          v-if="store.state.user?.loginUser?.userRole === admin"
+        >
           <icon-font type="icon-stgl" :size="14" />
           <a style="margin-left: 0">题目管理</a>
         </a-menu-item>
-        <a-menu-item key="/manage/user">
+        <a-menu-item
+          key="/manage/user"
+          v-if="store.state.user?.loginUser?.userRole === admin"
+        >
           <icon-font type="icon-jsgl" :size="14" />
           <a style="margin-left: 0">用户管理</a>
         </a-menu-item>
