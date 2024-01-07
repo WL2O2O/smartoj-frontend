@@ -1,11 +1,21 @@
 <template>
-  <a-row id="GloableHeader" class="grid-demo" align="center" :wrap="false">
+  <a-row
+    id="GloableHeader"
+    class="grid-demo"
+    align="center"
+    :wrap="false"
+    style="
+      box-shadow: inset 0px -10px 15px -15px rgba(35, 7, 7, 0.21);
+      border-radius: 10px;
+    "
+  >
     <a-col flex="auto">
       <a-menu
         mode="horizontal"
         theme="light"
         :selected-keys="selectedKeys"
         @menu-item-click="doMenuClick"
+        style="box-shadow: inset 0px -10px 15px -15px rgba(35, 7, 7, 0.21)"
       >
         <a-menu-item
           key="0"
@@ -33,11 +43,21 @@
         </a-menu-item>
       </a-menu>
     </a-col>
-    <a-col flex="100px">
-      <div>
-        {{ store.state.user?.loginUser?.userName ?? "未登录" }}
-      </div>
-    </a-col>
+    <div id="userInfoView" style="margin-right: 20px">
+      <a-dropdown trigger="hover">
+        <a-avatar shape="square" style="background-color: #3370ff">
+          {{ store.state.user?.loginUser?.userName ?? "未登录" }}
+        </a-avatar>
+        <template #content v-if="!isLoggedIn">
+          <a-doption v-if="!isLoggedIn" @click="login">登 录</a-doption>
+        </template>
+        <template #content v-else>
+          <a-doption @click="setting">个人信息</a-doption>
+          <a-doption @click="logout">退 出</a-doption>
+          <!--          <a-doption @click="">预留判题API</a-doption>-->
+        </template>
+      </a-dropdown>
+    </div>
   </a-row>
 </template>
 
@@ -47,7 +67,7 @@ import { useRouter } from "vue-router";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import checkAccess from "@/access/checkAccess";
-import ACCESS_ENUM from "@/access/accessEnum";
+import { UserControllerService } from "../../generated";
 
 // 使用 vueRouter 实现路由跳转
 const router = useRouter();
@@ -81,6 +101,34 @@ const doMenuClick = (key: string) => {
   });
 };
 
+// 计算属性，判断用户是否已登录
+const isLoggedIn = computed(() => {
+  if (store.state.user?.loginUser?.userName) return true;
+  else return false;
+});
+
+// 用户登录
+const login = () => {
+  router.push({
+    path: "user/login",
+  });
+};
+
+// 用户注销
+const logout = () => {
+  UserControllerService.userLogoutUsingPost();
+  router.push({
+    path: "/",
+  });
+  location.reload();
+};
+
+// 个人信息
+const setting = () => {
+  router.push({
+    path: "/info",
+  });
+};
 // setTimeout(() => {
 //   store.dispatch("user/getLoginUser", {
 //     userName: "CSGUIDER",

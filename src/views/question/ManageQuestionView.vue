@@ -1,5 +1,28 @@
 <template>
   <div id="manageQuestionView">
+    <a-form
+      :model="searchParams"
+      layout="inline"
+      style="justify-content: center; align-content: center; margin: 25px"
+    >
+      <a-form-item field="title" label="用户编号：" tooltip="请输入用户的编号">
+        <a-input
+          v-model="searchParams.id"
+          placeholder="请输入要搜索的用户编号"
+        />
+      </a-form-item>
+      <a-form-item field="title" label="用户名称：" tooltip="请输入用户名称">
+        <a-input
+          v-model="searchParams.userName"
+          placeholder="请输入要搜索的用户名称"
+        />
+      </a-form-item>
+      <a-form-item>
+        <a-button type="outline" shape="round" status="normal" @click="doSubmit"
+          >搜 索
+        </a-button>
+      </a-form-item>
+    </a-form>
     <a-table
       :ref="tableRef"
       :columns="columns"
@@ -17,8 +40,23 @@
       </template>
       <template #optional="{ record }">
         <a-space>
-          <a-button type="primary" @click="doUpdate(record)">修改</a-button>
-          <a-button status="danger" @click="doDelete(record)">删除</a-button>
+          <a-button type="primary" @click="doUpdate(record)" style="width: 45px"
+            >修改</a-button
+          >
+          <a-popconfirm
+            content="确定要删除此用户吗?"
+            type="error"
+            okText="是"
+            cancelText="否"
+            @cancel="
+              () => {
+                console.log(`已取消`);
+              }
+            "
+            @ok="doDelete(record)"
+          >
+            <a-button status="danger" style="width: 45px">删除 </a-button>
+          </a-popconfirm>
         </a-space>
       </template>
     </a-table>
@@ -94,6 +132,8 @@ const columns = [
   {
     title: "内容",
     dataIndex: "content",
+    ellipsis: true,
+    tooltip: true,
   },
   {
     title: "标签",
@@ -102,6 +142,8 @@ const columns = [
   {
     title: "答案",
     dataIndex: "answer",
+    ellipsis: true,
+    tooltip: true,
   },
   {
     title: "提交数",
@@ -114,10 +156,14 @@ const columns = [
   {
     title: "判题配置",
     dataIndex: "judgeConfig",
+    ellipsis: true,
+    tooltip: true,
   },
   {
     title: "判题用例",
     dataIndex: "judgeCase",
+    ellipsis: true,
+    tooltip: true,
   },
   {
     title: "用户id",
@@ -159,5 +205,8 @@ const doUpdate = (question: Question) => {
 
 <style scoped>
 #manageQuestionView {
+  padding: 5px;
+  box-shadow: 0px 0px 5px rgba(35, 7, 7, 0.21);
+  border-radius: 10px;
 }
 </style>

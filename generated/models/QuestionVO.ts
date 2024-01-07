@@ -9,12 +9,11 @@ import type { UserVO } from './UserVO';
 export type QuestionVO = {
     acceptNum?: number;
     content?: string;
-    favourNum?: number;
+    createTime?: string;
     id?: number;
     judgeConfig?: JudgeConfig;
     submitNum?: number;
     tags?: Array<string>;
-    thumbNum?: number;
     title?: string;
     userId?: number;
     userVO?: UserVO;

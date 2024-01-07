@@ -1,6 +1,10 @@
 <template>
   <div id="questionSubmitView">
-    <a-form :model="searchParams" layout="inline">
+    <a-form
+      :model="searchParams"
+      layout="inline"
+      style="justify-content: center; align-content: center; margin: 25px"
+    >
       <a-form-item field="questionId" label="题号" style="min-width: 240px">
         <a-input v-model="searchParams.questionId" placeholder="请输入题目ID" />
       </a-form-item>
@@ -17,7 +21,7 @@
         </a-select>
       </a-form-item>
       <a-form-item>
-        <a-button type="primary" @click="doSubmit">搜索</a-button>
+        <a-button type="outline" @click="doSubmit" shape="round">搜索</a-button>
       </a-form-item>
     </a-form>
     <a-divider size="0" />
@@ -30,6 +34,7 @@
         pageSize: searchParams.pageSize,
         current: searchParams.current,
         total,
+        showJumper: true,
       }"
       @page-change="onPageChange"
     >
@@ -37,7 +42,14 @@
         {{ JSON.stringify(record.judgeInfo) }}
       </template>
       <template #createTime="{ record }">
-        {{ moment(record.createTime).format("YYYY-MM-DD HH:MM") }}
+        {{ moment(record.createTime).format("YYYY-MM-DD HH:mm") }}
+      </template>
+      <template #status="{ record }">
+        <!--判题状态（0 - 待判题、1 - 判题中、2 - 成功、3 - 失败）-->
+        <a-tag v-if="record.status === 0" color="cyan">待判题</a-tag>
+        <a-tag v-if="record.status === 1" color="green">判题中</a-tag>
+        <a-tag v-if="record.status === 2" color="blue">成功</a-tag>
+        <a-tag v-if="record.status === 3" color="red">失败</a-tag>
       </template>
     </a-table>
   </div>
@@ -99,30 +111,37 @@ const columns = [
   {
     title: "提交号",
     dataIndex: "id",
+    align: "center",
   },
   {
     title: "编程语言",
     dataIndex: "language",
+    align: "center",
   },
   {
     title: "判题信息",
     slotName: "judgeInfo",
+    align: "center",
   },
   {
     title: "判题状态",
-    dataIndex: "status",
+    slotName: "status",
+    align: "center",
   },
   {
     title: "题目 id",
     dataIndex: "questionId",
+    align: "center",
   },
   {
     title: "提交者 id",
     dataIndex: "userId",
+    align: "center",
   },
   {
     title: "创建时间",
     slotName: "createTime",
+    align: "center",
   },
 ];
 
@@ -159,7 +178,8 @@ const doSubmit = () => {
 
 <style scoped>
 #questionSubmitView {
-  max-width: 1280px;
-  margin: 0 auto;
+  padding: 5px;
+  box-shadow: 0px 0px 5px rgba(35, 7, 7, 0.21);
+  border-radius: 10px;
 }
 </style>

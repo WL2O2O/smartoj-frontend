@@ -1,6 +1,4 @@
-import HomeView from "@/views/ExampleView.vue";
 import { RouteRecordRaw } from "vue-router";
-// import AdminView from "@/views/AdminView.vue";
 import NoAuthView from "@/views/NoAuthView.vue";
 import UserLayout from "@/layouts/UserLayout.vue";
 import UserLoginView from "@/views/user/UserLoginView.vue";
@@ -10,6 +8,8 @@ import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
 import QuestionsView from "@/views/question/QuestionsView.vue";
 import QuestionSubmitView from "@/views/question/QuestionSubmitView.vue";
 import ViewQuestionView from "@/views/question/ViewQuestionView.vue";
+import UserManageView from "@/views/user/UserManageView.vue";
+import UserInfoView from "@/views/user/UserInfoView.vue";
 
 import ACCESS_ENUM from "@/access/accessEnum";
 
@@ -36,17 +36,17 @@ export const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/",
-    name: "主页",
+    name: "题库",
     component: QuestionsView,
   },
-  {
-    path: "/questions",
-    name: "浏览题目",
-    component: QuestionsView,
-  },
+  // {
+  //   path: "/questions",
+  //   name: "浏览题目",
+  //   component: QuestionsView,
+  // },
   {
     path: "/questions_submit",
-    name: "浏览题目提交",
+    name: "提交总览",
     component: QuestionSubmitView,
   },
   {
@@ -55,6 +55,7 @@ export const routes: Array<RouteRecordRaw> = [
     component: AddQuestionView,
     meta: {
       access: ACCESS_ENUM.ADMIN,
+      hideInMenu: true,
     },
   },
   {
@@ -63,6 +64,22 @@ export const routes: Array<RouteRecordRaw> = [
     component: ManageQuestionView,
     meta: {
       access: ACCESS_ENUM.ADMIN,
+    },
+  },
+  {
+    path: "/manage/user",
+    name: "用户管理",
+    component: UserManageView,
+    meta: {
+      access: ACCESS_ENUM.ADMIN,
+    },
+  },
+  {
+    path: "/info",
+    name: "用户信息",
+    component: UserInfoView,
+    meta: {
+      hideInMenu: true,
     },
   },
   {
