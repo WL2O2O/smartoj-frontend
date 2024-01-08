@@ -48,35 +48,18 @@
         </a-menu-item>
         <a-menu-item
           key="/manage/question"
-          v-if="store.state.user?.loginUser?.userRole === admin"
+          v-if="checkAccess(store.state.user?.loginUser, ACCESS_ENUM.ADMIN)"
         >
           <icon-font type="icon-stgl" :size="14" />
           <a style="margin-left: 0">题目管理</a>
         </a-menu-item>
         <a-menu-item
           key="/manage/user"
-          v-if="store.state.user?.loginUser?.userRole === admin"
+          v-if="checkAccess(store.state.user?.loginUser, ACCESS_ENUM.ADMIN)"
         >
           <icon-font type="icon-jsgl" :size="14" />
           <a style="margin-left: 0">用户管理</a>
         </a-menu-item>
-        <!--        <a-menu-item :key="item.path">-->
-        <!--            <icon-font type="icon-coding" :size="14" />-->
-        <!--            -->
-        <!--          </div>-->
-        <!--          <div v-if="item.name === '提交总览'">-->
-        <!--            <icon-font type="icon-coding" :size="14" />-->
-        <!--            {{ item.name }}-->
-        <!--          </div>-->
-        <!--          <div v-if="item.name === '管理题目'">-->
-        <!--            <icon-font type="icon-coding" :size="14" />-->
-        <!--            {{ item.name }}-->
-        <!--          </div>-->
-        <!--          <div v-if="item.name === '用户管理'">-->
-        <!--            <icon-font type="icon-coding" :size="14" />-->
-        <!--            {{ item.name }}-->
-        <!--          </div>-->
-        <!--        </a-menu-item>-->
       </a-menu>
     </a-col>
     <div id="userInfoView" style="margin-right: 30px">
@@ -107,6 +90,7 @@ import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import checkAccess from "@/access/checkAccess";
 import { UserControllerService } from "../../generated";
+import ACCESS_ENUM from "@/access/accessEnum";
 
 // 使用 vueRouter 实现路由跳转
 const router = useRouter();
@@ -177,7 +161,7 @@ const setting = () => {
 import { Icon } from "@arco-design/web-vue";
 
 const IconFont = Icon.addFromIconFontCn({
-  src: "https://at.alicdn.com/t/c/font_4402305_lgw67nim0j.js",
+  src: "https://at.alicdn.com/t/c/font_4402305_py1u6q9cf5h.js",
 });
 </script>
 

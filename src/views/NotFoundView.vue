@@ -2,12 +2,14 @@
   <a-layout-content class="content">
     <div class="not-found">
       <div class="not-found-content">
-        <h1>403</h1>
-        <p>您没有权限访问该页面</p>
-        <p>为您献上一颗安全坤蛋</p>
+        <h1>404</h1>
+        <p>页面走丢了，请输入正确路径🫡...</p>
+        <p>3秒后自动返回首页</p>
       </div>
       <div class="not-found-logo">
-        <img alt="OJ logo" src="../assets/oj.png" />
+        <img
+          src="https://cs-wlei224.obs.cn-south-1.myhuaweicloud.com/blog-imgs/202401081033475.png"
+        />
       </div>
     </div>
   </a-layout-content>
@@ -16,6 +18,11 @@
 <script lang="ts">
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import { Icon } from "@arco-design/web-vue";
+
+const IconFont = Icon.addFromIconFontCn({
+  src: "https://at.alicdn.com/t/c/font_4402305_py1u6q9cf5h.js",
+});
 
 export default {
   setup() {
@@ -68,6 +75,6 @@ export default {
 }
 
 .not-found-logo img {
-  height: 80px;
+  height: 120px;
 }
 </style>

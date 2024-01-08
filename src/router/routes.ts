@@ -10,13 +10,9 @@ import QuestionSubmitView from "@/views/question/QuestionSubmitView.vue";
 import ViewQuestionView from "@/views/question/ViewQuestionView.vue";
 import UserManageView from "@/views/user/UserManageView.vue";
 import UserInfoView from "@/views/user/UserInfoView.vue";
+import NotFoundView from "@/views/NotFoundView.vue";
 
 import ACCESS_ENUM from "@/access/accessEnum";
-import { Icon } from "@arco-design/web-vue";
-
-const IconFont = Icon.addFromIconFontCn({
-  src: "https://at.alicdn.com/t/c/font_4402305_lgw67nim0j.js",
-});
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -112,6 +108,14 @@ export const routes: Array<RouteRecordRaw> = [
     component: NoAuthView,
     meta: {
       hideInMenu: "true",
+    },
+  },
+  {
+    path: "/:pathMatch(.*)",
+    name: "404",
+    component: NotFoundView, // 自定义的 404 页面组件
+    meta: {
+      hideInMenu: true, // 可根据需要隐藏该路由项
     },
   },
   // {
