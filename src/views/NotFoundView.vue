@@ -21,7 +21,7 @@ import { useRouter } from "vue-router";
 import { Icon } from "@arco-design/web-vue";
 
 const IconFont = Icon.addFromIconFontCn({
-  src: "https://at.alicdn.com/t/c/font_4402305_py1u6q9cf5h.js",
+  src: "https://at.alicdn.com/t/c/font_4402305_p3sdkfe4k8.js",
 });
 
 export default {

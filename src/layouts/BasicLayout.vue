@@ -21,10 +21,15 @@
 
 .header {
   box-shadow: #eee 1px 1px 5px;
+  position: fixed; /* 使元素固定定位 */
+  top: 0; /* 固定在顶部 */
+  width: 100%; /* 可选，根据需要设定宽度，确保菜单栏横跨整个视口 */
+  z-index: 100; /* 确保菜单栏在内容之上 */
 }
 
 .content {
   background: linear-gradient(to right, #fefefe, #fff);
+  margin-top: 50px;
   margin-bottom: 15px;
   padding: 20px;
 }

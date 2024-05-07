@@ -1,5 +1,6 @@
 import { RouteRecordRaw } from "vue-router";
 import NoAuthView from "@/views/NoAuthView.vue";
+import LinkView from "@/views/LinkView.vue";
 import UserLayout from "@/layouts/UserLayout.vue";
 import UserLoginView from "@/views/user/UserLoginView.vue";
 import UserRegisterView from "@/views/user/UserRegisterView.vue";
@@ -101,6 +102,14 @@ export const routes: Array<RouteRecordRaw> = [
       hideInMenu: true,
     },
   },
+  {
+    path: "/link",
+    name: "SJudge",
+    component: LinkView,
+    meta: {
+      access: ACCESS_ENUM.USER,
+    },
+  },
 
   {
     path: "/noAuth",
@@ -142,6 +151,6 @@ export const routes: Array<RouteRecordRaw> = [
   //   // this generates a separate chunk (about.[hash].js) for this route
   //   // which is lazy-loaded when the route is visited.
   //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+  //     import(/* webpackChunkName: "about" */ "../views/LinkView.vue"),
   // },
 ];

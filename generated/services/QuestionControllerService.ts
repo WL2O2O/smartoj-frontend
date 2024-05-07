@@ -31,8 +31,8 @@ export class QuestionControllerService {
      * @throws ApiError
      */
     public static addQuestionUsingPost(
-questionAddRequest: QuestionAddRequest,
-): CancelablePromise<BaseResponse_long_ | any> {
+      questionAddRequest: QuestionAddRequest,
+    ): CancelablePromise<BaseResponse_long_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/question/add',
@@ -53,8 +53,8 @@ questionAddRequest: QuestionAddRequest,
      * @throws ApiError
      */
     public static deleteQuestionUsingPost(
-deleteRequest: DeleteRequest,
-): CancelablePromise<BaseResponse_boolean_ | any> {
+      deleteRequest: DeleteRequest,
+    ): CancelablePromise<BaseResponse_boolean_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/question/delete',
@@ -75,8 +75,8 @@ deleteRequest: DeleteRequest,
      * @throws ApiError
      */
     public static editQuestionUsingPost(
-questionEditRequest: QuestionEditRequest,
-): CancelablePromise<BaseResponse_boolean_ | any> {
+      questionEditRequest: QuestionEditRequest,
+    ): CancelablePromise<BaseResponse_boolean_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/question/edit',
@@ -96,8 +96,8 @@ questionEditRequest: QuestionEditRequest,
      * @throws ApiError
      */
     public static getQuestionByIdUsingGet(
-id?: number,
-): CancelablePromise<BaseResponse_Question_> {
+      id?: number,
+    ): CancelablePromise<BaseResponse_Question_> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/question/get',
@@ -119,8 +119,8 @@ id?: number,
      * @throws ApiError
      */
     public static getQuestionVoByIdUsingGet(
-id?: number,
-): CancelablePromise<BaseResponse_QuestionVO_> {
+      id?: number,
+    ): CancelablePromise<BaseResponse_QuestionVO_> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/question/get/vo',
@@ -143,8 +143,8 @@ id?: number,
      * @throws ApiError
      */
     public static listQuestionByPageUsingPost(
-questionQueryRequest: QuestionQueryRequest,
-): CancelablePromise<BaseResponse_Page_Question_ | any> {
+      questionQueryRequest: QuestionQueryRequest,
+    ): CancelablePromise<BaseResponse_Page_Question_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/question/list/page',
@@ -165,8 +165,8 @@ questionQueryRequest: QuestionQueryRequest,
      * @throws ApiError
      */
     public static listQuestionVoByPageUsingPost(
-questionQueryRequest: QuestionQueryRequest,
-): CancelablePromise<BaseResponse_Page_QuestionVO_ | any> {
+      questionQueryRequest: QuestionQueryRequest,
+    ): CancelablePromise<BaseResponse_Page_QuestionVO_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/question/list/page/vo',
@@ -187,8 +187,8 @@ questionQueryRequest: QuestionQueryRequest,
      * @throws ApiError
      */
     public static listMyQuestionVoByPageUsingPost(
-questionQueryRequest: QuestionQueryRequest,
-): CancelablePromise<BaseResponse_Page_QuestionVO_ | any> {
+      questionQueryRequest: QuestionQueryRequest,
+    ): CancelablePromise<BaseResponse_Page_QuestionVO_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/question/my/list/page/vo',
@@ -209,8 +209,8 @@ questionQueryRequest: QuestionQueryRequest,
      * @throws ApiError
      */
     public static doQuestionSubmitUsingPost(
-questionSubmitAddRequest: QuestionSubmitAddRequest,
-): CancelablePromise<BaseResponse_long_ | any> {
+      questionSubmitAddRequest: QuestionSubmitAddRequest,
+    ): CancelablePromise<BaseResponse_long_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/question/question_submit/do',
@@ -231,8 +231,8 @@ questionSubmitAddRequest: QuestionSubmitAddRequest,
      * @throws ApiError
      */
     public static listQuestionSubmitByPageUsingPost(
-questionSubmitQueryRequest: QuestionSubmitQueryRequest,
-): CancelablePromise<BaseResponse_Page_QuestionSubmitVO_ | any> {
+      questionSubmitQueryRequest: QuestionSubmitQueryRequest,
+    ): CancelablePromise<BaseResponse_Page_QuestionSubmitVO_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/question/question_submit/list/page',
@@ -253,8 +253,8 @@ questionSubmitQueryRequest: QuestionSubmitQueryRequest,
      * @throws ApiError
      */
     public static updateQuestionUsingPost(
-questionUpdateRequest: QuestionUpdateRequest,
-): CancelablePromise<BaseResponse_boolean_ | any> {
+      questionUpdateRequest: QuestionUpdateRequest,
+    ): CancelablePromise<BaseResponse_boolean_ | any> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/api/question/update',

@@ -52,11 +52,77 @@
       </a-button>
     </div>
   </div>
+
+  <div class="container" style="margin: 0 auto; margin-bottom: 0">
+    <!-- 添加一个div用于ECharts图表，包含在具有伸缩特性的容器内 -->
+    <div ref="echartsContainer" class="echarts-chart-container"></div>
+  </div>
 </template>
 <script setup lang="ts">
+import * as echarts from "echarts";
+
+// 定义一个ref来持有图表容器的引用
+const echartsContainer = ref(null);
+
+onMounted(() => {
+  var chartDom = echartsContainer.value;
+  var myChart = echarts.init(chartDom);
+  var option;
+
+  console.log(myChart);
+
+  const getVirtualData = (year) => {
+    const date = +echarts.time.parse(year + "-01-01");
+    const end = +echarts.time.parse(+year + 1 + "-01-01");
+    const dayTime = 3600 * 24 * 1000;
+    const data = [];
+    for (let time = date; time < end; time += dayTime) {
+      data.push([
+        echarts.time.format(time, "{yyyy}-{MM}-{dd}", false),
+        Math.floor(Math.random() * 10000),
+      ]);
+    }
+    return data;
+  };
+  option = {
+    title: {
+      top: 30,
+      left: "center",
+      text: "Daily Step Count",
+    },
+    tooltip: {},
+    visualMap: {
+      min: 0,
+      max: 10000,
+      type: "piecewise",
+      orient: "horizontal",
+      left: "center",
+      top: 65,
+    },
+    calendar: {
+      top: 120,
+      left: 60,
+      right: 60,
+      cellSize: ["auto", 13],
+      range: "2024",
+      itemStyle: {
+        borderWidth: 0.5,
+      },
+      yearLabel: { show: false },
+    },
+    series: {
+      type: "heatmap",
+      coordinateSystem: "calendar",
+      data: getVirtualData("2016"),
+    },
+  };
+
+  option && myChart.setOption(option);
+});
+
 import { useStore } from "vuex";
 import { UserControllerService, UserUpdateMyRequest } from "../../../generated";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { FileItem, Message } from "@arco-design/web-vue";
 import { useRouter } from "vue-router";
 import moment from "moment";
@@ -71,7 +137,7 @@ let loginUser = store.state.user.loginUser;
 
 const data = [
   {
-    label: "用户名称：",
+    label: "用户昵称：",
     value: loginUser.userName,
   },
   {
@@ -148,5 +214,17 @@ const onChange = async (_: never, currentFile: FileItem) => {
   max-width: 820px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(35, 7, 7, 0.21);
+}
+
+.container {
+  display: flex; /* 或 grid, 根据布局需求选择 */
+  flex-direction: column; /* 如果是flex布局，确保是列方向 */
+  height: 100vh; /* 让容器高度充满整个视口高度 */
+}
+
+.echarts-chart-container {
+  flex-grow: 1; /* 允许此元素在垂直方向上填充剩余空间（仅限flex布局） */
+  overflow-y: auto; /* 当内容溢出时显示垂直滚动条 */
+  position: relative; /* 为绝对定位的元素（如滚动条样式）提供定位上下文 */
 }
 </style>

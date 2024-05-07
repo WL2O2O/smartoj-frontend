@@ -12,6 +12,9 @@ export type QuestionVO = {
     createTime?: string;
     id?: number;
     judgeConfig?: JudgeConfig;
+    // 优化题目显示界面的显示字段
+    status?: number;
+    difficulty?: string;
     submitNum?: number;
     tags?: Array<string>;
     title?: string;

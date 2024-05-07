@@ -38,8 +38,29 @@
       }"
       @page-change="onPageChange"
     >
+      <!--      <template #judgeInfo="{ record }">-->
+      <!--        {{ JSON.stringify(record.judgeInfo) }}-->
+      <!--      </template>-->
       <template #judgeInfo="{ record }">
-        {{ JSON.stringify(record.judgeInfo) }}
+        <a-space wrap>
+          <a-tag
+            size="medium"
+            v-for="(info, index) of record.judgeInfo"
+            :key="index"
+            :color="colors[index.length % colors.length]"
+          >
+            {{
+              `${
+                index === "message"
+                  ? "结果"
+                  : index === "time"
+                  ? "耗时"
+                  : "消耗内存"
+              }`
+            }}
+            {{ "：" + info }}
+          </a-tag>
+        </a-space>
       </template>
       <template #createTime="{ record }">
         {{ moment(record.createTime).format("YYYY-MM-DD HH:mm") }}
@@ -67,6 +88,9 @@ import { useRouter } from "vue-router";
 import moment from "moment";
 
 const tableRef = ref();
+
+// 优化界面显示
+const colors = ["orange", "green", "blue", "red"];
 
 const dataList = ref([]);
 const total = ref(0);

@@ -3,7 +3,7 @@
     <a-row :gutter="[24, 24]">
       <a-col :md="12" :xs="24">
         <a-tabs default-active-key="question">
-          <a-tab-pane key="question" title="题目">
+          <a-tab-pane key="question" title="题目描述">
             <a-card v-if="question" :title="question.title">
               <a-descriptions
                 title="判题条件"
@@ -32,8 +32,12 @@
               </template>
             </a-card>
           </a-tab-pane>
-          <a-tab-pane key="comment" title="评论" disabled> 评论区</a-tab-pane>
-          <a-tab-pane key="answer" title="答案"> 暂时无法查看答案</a-tab-pane>
+          <a-tab-pane key="comment" title="我的提交"
+            >TODO://查看提交记录</a-tab-pane
+          >
+          <a-tab-pane key="answer" title="查看题解">
+            暂时无法查看答案</a-tab-pane
+          >
         </a-tabs>
       </a-col>
       <a-col :md="12" :xs="24">

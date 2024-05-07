@@ -107,8 +107,8 @@
         title="个人信息"
         style="max-width: 480px; margin: 0 auto"
       >
-        <a-form-item field="名称" label="名称 :">
-          <a-input v-model="userInfo.userName" placeholder="请输入用户名称" />
+        <a-form-item field="昵称" label="昵称 :">
+          <a-input v-model="userInfo.userName" placeholder="请输入用户昵称" />
         </a-form-item>
         <a-form-item field="账号" label="账号 :">
           <a-input v-model="userInfo.userAccount" placeholder="请输入账号" />
@@ -193,7 +193,7 @@ const columns = [
     align: "center",
   },
   {
-    title: "名称",
+    title: "昵称",
     dataIndex: "userName",
     align: "center",
   },

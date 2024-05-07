@@ -5,6 +5,7 @@
     align="center"
     :wrap="false"
     style="
+      background-color: white !important; /* 不透明的白色背景 */
       box-shadow: inset 0px -10px 15px -15px rgba(35, 7, 7, 0.21);
       border-radius: 10px;
     "
@@ -60,6 +61,10 @@
           <icon-font type="icon-jsgl" :size="14" />
           <a style="margin-left: 0">用户管理</a>
         </a-menu-item>
+        <a-menu-item key="/test">
+          <icon-font type="icon-sjkb" :size="14" />
+          <a style="margin-left: 0">测试</a>
+        </a-menu-item>
       </a-menu>
     </a-col>
     <div id="userInfoView" style="margin-right: 30px">
@@ -72,10 +77,13 @@
         </template>
         <template #content v-else>
           <a-doption @click="setting"
-            ><icon-font type="icon-wode" :size="14" /> 我的</a-doption
+            ><icon-font type="icon-wode" :size="14" /> 个人信息</a-doption
           >
           <a-doption @click="logout"
-            ><icon-font type="icon-tuichu" :size="15" /> 退出</a-doption
+            ><icon-font type="icon-tuichu" :size="15" /> 退出系统</a-doption
+          >
+          <a-doption @click="link"
+            ><icon-font type="icon-rongqifuwu" :size="15" /> 沙箱支持</a-doption
           >
         </template>
       </a-dropdown>
@@ -146,6 +154,14 @@ const logout = () => {
   location.reload();
 };
 
+// 跳转沙箱链接
+// 用户登录
+const link = () => {
+  router.push({
+    path: "/link",
+  });
+};
+
 // 个人信息
 const setting = () => {
   router.push({
@@ -161,7 +177,7 @@ const setting = () => {
 import { Icon } from "@arco-design/web-vue";
 
 const IconFont = Icon.addFromIconFontCn({
-  src: "https://at.alicdn.com/t/c/font_4402305_py1u6q9cf5h.js",
+  src: "https://at.alicdn.com/t/c/font_4402305_p3sdkfe4k8.js",
 });
 </script>
 
