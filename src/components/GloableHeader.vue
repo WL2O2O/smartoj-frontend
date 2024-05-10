@@ -24,7 +24,11 @@
           disabled
         >
           <div class="title-bar">
-            <img class="logo" src="../assets/oj.png" alt="logo" />
+            <img
+              class="logo"
+              src="https://cs-wlei224.obs.cn-south-1.myhuaweicloud.com/blog-imgs/202405081135317.png"
+              alt="logo"
+            />
             <div
               class="title"
               :style="{
@@ -61,10 +65,6 @@
           <icon-font type="icon-jsgl" :size="14" />
           <a style="margin-left: 0">用户管理</a>
         </a-menu-item>
-        <a-menu-item key="/test">
-          <icon-font type="icon-sjkb" :size="14" />
-          <a style="margin-left: 0">测试</a>
-        </a-menu-item>
       </a-menu>
     </a-col>
     <div id="userInfoView" style="margin-right: 30px">
@@ -73,7 +73,12 @@
           {{ store.state.user?.loginUser?.userName ?? "未登录" }}
         </a-avatar>
         <template #content v-if="!isLoggedIn">
-          <a-doption v-if="!isLoggedIn" @click="login">登 录</a-doption>
+          <a-doption v-if="!isLoggedIn" @click="login">
+            <icon-font type="icon-login" :size="14" /> 点击登录
+          </a-doption>
+          <a-doption v-if="!isLoggedIn" @click="register">
+            <icon-font type="icon-login" :size="14" /> 点击注册
+          </a-doption>
         </template>
         <template #content v-else>
           <a-doption @click="setting"
@@ -145,6 +150,13 @@ const login = () => {
   });
 };
 
+// 用户注册
+const register = () => {
+  router.push({
+    path: "user/register",
+  });
+};
+
 // 用户注销
 const logout = () => {
   UserControllerService.userLogoutUsingPost();
@@ -177,7 +189,7 @@ const setting = () => {
 import { Icon } from "@arco-design/web-vue";
 
 const IconFont = Icon.addFromIconFontCn({
-  src: "https://at.alicdn.com/t/c/font_4402305_p3sdkfe4k8.js",
+  src: "https://at.alicdn.com/t/c/font_4402305_mkpdx3zmjcr.js",
 });
 </script>
 

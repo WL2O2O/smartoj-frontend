@@ -161,7 +161,7 @@
 import * as echarts from "echarts";
 
 const IconFont = Icon.addFromIconFontCn({
-  src: "https://at.alicdn.com/t/c/font_4402305_p3sdkfe4k8.js",
+  src: "https://at.alicdn.com/t/c/font_4402305_mkpdx3zmjcr.js",
 });
 
 // 定义一个ref来持有图表容器的引用

@@ -9,6 +9,8 @@ import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
 import QuestionsView from "@/views/question/QuestionsView.vue";
 import QuestionSubmitView from "@/views/question/QuestionSubmitView.vue";
 import ViewQuestionView from "@/views/question/ViewQuestionView.vue";
+import SolveQuestionView from "@/views/question/SolveQuestionView.vue";
+import ViewQuestionLayout from "@/layouts/ViewQuestionLayout.vue";
 import UserManageView from "@/views/user/UserManageView.vue";
 import UserInfoView from "@/views/user/UserInfoView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
@@ -93,10 +95,18 @@ export const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/view/question/:id",
+    path: "/view/question",
     name: "在线做题",
-    component: ViewQuestionView,
-    props: true,
+    component: ViewQuestionLayout,
+    children: [
+      {
+        path: "/view/question/:id",
+        name: "在线做题",
+        // component: ViewQuestionView,
+        component: SolveQuestionView,
+        props: true,
+      },
+    ],
     meta: {
       access: ACCESS_ENUM.USER,
       hideInMenu: true,

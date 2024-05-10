@@ -21,6 +21,15 @@
       </a-form-item>
       <a-form-item
         required
+        field="userName"
+        label="昵称"
+        tooltip="起一个酷酷的昵称吧"
+        :rules="[{ required: true, message: '昵称不能为空' }]"
+      >
+        <a-input v-model="form.userName" placeholder="请输入昵称" />
+      </a-form-item>
+      <a-form-item
+        required
         field="userPassword"
         tooltip="密码不能小于8位"
         :rules="[
@@ -96,6 +105,7 @@ const store = useStore();
 const form = reactive<UserRegisterRequest>({
   checkPassword: "",
   userAccount: "",
+  userName: "",
   userPassword: "",
 });
 

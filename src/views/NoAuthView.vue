@@ -7,7 +7,10 @@
         <p>为您献上一颗安全坤蛋</p>
       </div>
       <div class="not-found-logo">
-        <img alt="OJ logo" src="../assets/oj.png" />
+        <img
+          alt="OJ logo"
+          src="https://cs-wlei224.obs.cn-south-1.myhuaweicloud.com/blog-imgs/202405081135317.png"
+        />
       </div>
     </div>
   </a-layout-content>
