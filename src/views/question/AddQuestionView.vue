@@ -8,6 +8,12 @@
       <a-form-item field="tags" label="标签">
         <a-input-tag v-model="form.tags" placeholder="请选择标签" allow-clear />
       </a-form-item>
+      <a-form-item field="difficulty" label="难度">
+        <a-input
+          v-model="form.difficulty"
+          placeholder="请输入难度级别（简单、中等、困难）"
+        />
+      </a-form-item>
       <a-form-item field="content" label="题目内容">
         <MdEditor :value="form.content" :handle-change="onContentChange" />
       </a-form-item>
@@ -110,6 +116,7 @@ const updatePage = route.path.includes("update");
 let form = ref({
   title: "",
   tags: [],
+  difficulty: "",
   answer: "",
   content: "",
   judgeConfig: {

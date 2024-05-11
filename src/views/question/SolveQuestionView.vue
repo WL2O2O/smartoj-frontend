@@ -94,7 +94,10 @@
         </a-avatar>
         <template #content v-if="!isLoggedIn">
           <a-doption v-if="!isLoggedIn" @click="login">
-            <icon-font type="icon-login" :size="14" /> 登录
+            <icon-font type="icon-login" :size="14" /> 点击登录
+          </a-doption>
+          <a-doption v-if="!isLoggedIn" @click="register">
+            <icon-font type="icon-login" :size="14" /> 点击注册
           </a-doption>
         </template>
         <template #content v-else>
@@ -266,9 +269,120 @@
 </template>
 
 <script setup lang="ts">
-// 点击上一题
+// const currentQuestionId = ref(null);
+// const questionIds = ref([]);
+//
+// const loadingIdsData = async () => {
+//   try {
+//     // 使用服务获取所有题目的ID
+//     const response =
+//       await QuestionControllerService.getQuestionIdListUsingGet();
+//     const ids = response.data; // 从 response.data 中获取 ID 列表
+//     // console.log(666);
+//     // console.log(response);
+//     questionIds.value = ids;
+//     currentQuestionId.value = ids[0]; // 设置初始ID
+//   } catch (error) {
+//     console.error("Error fetching question IDs:", error);
+//   }
+// };
+import * as path from "path";
+const route = useRoute();
+// const questionIds = ref<number[]>([]);
+let questionIds: number[] | null[] = [];
+let questionIndex = 0;
+const loadingIdsData = async () => {
+  try {
+    // 使用服务获取所有题目的ID
+    const response =
+      await QuestionControllerService.getQuestionIdListUsingGet();
+    // 获取当前题目的id，并保存到全局变量中供切换题目方法使用
+    const questionId = Number(route.params.id);
+
+    // 从 response.data 中获取 ID 列表
+    const ids = response.data;
+    console.log("转换前：");
+    console.log(ids);
+
+    // 将 ids 数组的元素转换为数字
+    const idsAsNumbers = ids.map(Number);
+
+    questionIds = idsAsNumbers;
+    console.log("转换后：");
+    console.log(idsAsNumbers);
+
+    // 找到当前题目的索引并赋值给 questionIndex
+    questionIndex = idsAsNumbers.findIndex((id) => id === questionId);
+    // console.log(8888);
+    // console.log(ids);
+    // console.log("index = " + questionIndex);
+    // console.log("length = " + questionIds.length);
+
+    // currentQuestionId.value = ids[3]; // 设置初始ID
+    // 找到当前题目的索引并赋值给 questionIndex
+    // questionIndex = ids.findIndex((id) => id === questionId);
+  } catch (error) {
+    console.error("Error fetching question IDs:", error);
+  }
+};
+
+/**
+ * @description 点击跳转上一题
+ */
 const toPrevious = () => {
-  question.value?.id;
+  // 获取当前题目id的索引值index
+  // 获取索引值为index-1的题目id
+  // router.push(ids[index - 1])
+
+  // router
+  //   .push({
+  //     path: `${currentQuestionId.value}`,
+  //   })
+  //   .then(() => {
+  //     window.history.go(0);
+  //   });
+
+  if (questionIndex > 0) {
+    questionIndex--;
+    // currentQuestionId.value = questionIds[questionIndex];
+    router.push(`/view/question/${questionIds[questionIndex]}`).then(() => {
+      window.history.go(0);
+    });
+  } else {
+    message.info("已经是第一题了！");
+  }
+};
+
+const toNext = () => {
+  if (questionIndex < questionIds.length - 1) {
+    questionIndex++;
+    // currentQuestionId.value = questionIds[questionIndex];
+    router.push(`/view/question/${questionIds[questionIndex]}`).then(() => {
+      window.history.go(0);
+    });
+  } else {
+    message.info("已经是最后一题了！");
+  }
+};
+
+function getRandomIntInclusive(max: number) {
+  return Math.floor(Math.random() * (max + 1));
+}
+//
+// // 获取当前的questionIds长度
+const questionIdsLength = computed(() => questionIds.length);
+// console.log(9999);
+//
+// console.log("我在全局方法中，长度为：" + questionIdsLength.value);
+// const randomInt = getRandomIntInclusive(11);
+// console.log("random: " + randomInt); // 输出0到11之间的随机整数
+
+const toRandom = () => {
+  const randomIndex = getRandomIntInclusive(questionIdsLength.value);
+  console.log(questionIdsLength.value);
+  router.push(`/view/question/${questionIds[randomIndex]}`).then(() => {
+    window.history.go(0);
+  });
 };
 // 引入按钮所需的组件
 // import { ref } from "vue";
@@ -276,8 +390,16 @@ import MdViewer from "@/components/MdViewer.vue";
 
 const loading = ref(false);
 
-import { onMounted, ref, computed, withDefaults, defineProps } from "vue";
 import {
+  onMounted,
+  ref,
+  computed,
+  withDefaults,
+  defineProps,
+  watch,
+} from "vue";
+import {
+  Question,
   QuestionControllerService,
   QuestionSubmitAddRequest,
   QuestionVO,
@@ -285,7 +407,6 @@ import {
 } from "../../../generated";
 import message from "@arco-design/web-vue/es/message";
 const router = useRouter();
-const route = useRoute();
 const store = useStore();
 import { useStore } from "vuex";
 
@@ -311,7 +432,7 @@ const isLoggedIn = computed(() => {
 // 用户登录
 const login = () => {
   router.push({
-    path: "user/login",
+    path: "/user/login",
   });
 };
 
@@ -419,6 +540,7 @@ const doSubmit = async () => {
 onMounted(() => {
   // loadTestData();
   loadData();
+  loadingIdsData();
 });
 
 /**

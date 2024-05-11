@@ -358,7 +358,7 @@ const searchParams = ref<QuestionQueryRequest>({
 const loadData = async () => {
   const res = await QuestionControllerService.listQuestionVoByPageUsingPost({
     ...searchParams.value,
-    sortField: "title",
+    sortField: "id",
     sortOrder: "ascend",
   });
   if (res.code === 0) {

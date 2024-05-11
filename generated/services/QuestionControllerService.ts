@@ -3,6 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { BaseResponse_boolean_ } from '../models/BaseResponse_boolean_';
+import type { BaseResponse_List_long_ } from '../models/BaseResponse_List_long_';
 import type { BaseResponse_long_ } from '../models/BaseResponse_long_';
 import type { BaseResponse_Page_Question_ } from '../models/BaseResponse_Page_Question_';
 import type { BaseResponse_Page_QuestionSubmitVO_ } from '../models/BaseResponse_Page_QuestionSubmitVO_';
@@ -104,6 +105,23 @@ export class QuestionControllerService {
             query: {
                 'id': id,
             },
+            errors: {
+                401: `Unauthorized`,
+                403: `Forbidden`,
+                404: `Not Found`,
+            },
+        });
+    }
+
+    /**
+     * getQuestionIdList
+     * @returns BaseResponse_List_long_ OK
+     * @throws ApiError
+     */
+    public static getQuestionIdListUsingGet(): CancelablePromise<BaseResponse_List_long_> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/question/get/ids',
             errors: {
                 401: `Unauthorized`,
                 403: `Forbidden`,
