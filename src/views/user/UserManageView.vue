@@ -64,7 +64,6 @@
       </template>
       <template #userState="{ record }">
         <a-tag v-if="record.userState === '正常'" color="blue">正常</a-tag>
-        <a-tag v-if="record.userState === '注销'" color="grey">注销</a-tag>
         <a-tag v-if="record.userState === '封号'" color="red">封号</a-tag>
       </template>
       <template #optional="{ record }">

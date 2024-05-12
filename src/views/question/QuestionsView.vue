@@ -20,9 +20,6 @@
       <a-form-item>
         <a-button type="outline" @click="doSubmit" shape="round">搜索</a-button>
       </a-form-item>
-      <a-form-item>
-        <a-button type="outline" @click="doCreate" shape="round">创建</a-button>
-      </a-form-item>
     </a-form>
     <a-divider size="0" />
     <a-table
@@ -89,7 +86,7 @@
       border-radius: 10px;
     "
   >
-    <h3 style="text-align: center; top: -60px">当前进度</h3>
+    <h3 style="text-align: center; top: -60px">刷题进度</h3>
     <!-- 进度图表 -->
     <!--    <div-->
     <!--      class="container-schedule"-->
@@ -123,7 +120,7 @@
 
     <hr style="margin-top: -375px" />
 
-    <h3 style="text-align: center">雷达分布图</h3>
+    <h3 style="text-align: center">能力分析</h3>
     <!--    </div>-->
     <!-- 雷达分布图 -->
     <!--    <div-->
@@ -446,15 +443,6 @@ const doSubmit = () => {
     ...searchParams.value,
     current: 1,
   };
-};
-
-/**
- * 创建题目，重定向至创建界面路由
- */
-const doCreate = () => {
-  router.push({
-    path: `/add/question`,
-  });
 };
 
 /**

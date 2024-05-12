@@ -3,8 +3,9 @@
     <div class="not-found">
       <div class="not-found-content">
         <h1>403</h1>
-        <p>您没有权限访问该页面</p>
-        <p>为您献上一颗安全坤蛋</p>
+        <p>您还没有权限访问该页面，3s后将自动跳转至首页。</p>
+        <p>为你献上作者的座右铭：</p>
+        <p>If not now, when? If not me, who?</p>
       </div>
       <div class="not-found-logo">
         <img

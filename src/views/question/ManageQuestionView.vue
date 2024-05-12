@@ -22,6 +22,9 @@
           >搜 索
         </a-button>
       </a-form-item>
+      <a-form-item>
+        <a-button type="outline" @click="doCreate" shape="round">创建</a-button>
+      </a-form-item>
     </a-form>
     <a-table
       :ref="tableRef"
@@ -193,12 +196,25 @@ const doDelete = async (question: Question) => {
 
 const router = useRouter();
 
+/**
+ * 更新题目
+ * @param question
+ */
 const doUpdate = (question: Question) => {
   router.push({
     path: "/update/question",
     query: {
       id: question.id,
     },
+  });
+};
+
+/**
+ * 创建题目，重定向至创建界面路由
+ */
+const doCreate = () => {
+  router.push({
+    path: `/add/question`,
   });
 };
 </script>

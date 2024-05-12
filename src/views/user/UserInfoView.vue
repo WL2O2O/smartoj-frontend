@@ -48,7 +48,7 @@
         type="outline"
         style="margin: 10px"
         @click="openModalForm"
-        >修改用户信息
+        >修改我的信息
       </a-button>
     </div>
   </div>
