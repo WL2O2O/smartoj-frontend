@@ -114,158 +114,219 @@
       </a-dropdown>
     </div>
   </a-row>
-  <div id="solveQuestionView">
-    <a-split
-      :style="{
-        height: '86vh',
-        top: '50px',
-        bottom: '15px',
-        width: '100%',
-        minWidth: '500px',
-        border: '1px solid var(--color-border)',
-        paddingTop: '5px',
-        paddingLeft: '5px',
-      }"
-    >
-      <template #first>
-        <a-typography-paragraph>
-          <!--题目描述框-->
-          <a-col :md="36" :xs="48">
-            <a-tabs
-              default-active-key="question"
-              type="card-gutter"
-              :editable="false"
-              @add="handleAdd"
-              @delete="handleDelete"
-              show-add-button
-              auto-switch
-            >
-              <a-tab-pane key="question">
-                <template #title>
-                  <icon-font type="icon-des" /> 题目描述
-                </template>
-                <a-card v-if="question" :title="question.title">
-                  <a-descriptions
-                    title="判题条件"
-                    :column="{ xs: 1, md: 2, lg: 3 }"
-                  >
-                    <a-descriptions-item label="时间限制">
-                      {{ question.judgeConfig.timeLimit ?? 0 }}
-                    </a-descriptions-item>
-                    <a-descriptions-item label="内存限制">
-                      {{ question.judgeConfig.memoryLimit ?? 0 }}
-                    </a-descriptions-item>
-                    <a-descriptions-item label="堆栈限制">
-                      {{ question.judgeConfig.stackLimit ?? 0 }}
-                    </a-descriptions-item>
-                  </a-descriptions>
-                  <MdViewer :value="question.content || ''" />
-                  <a-divider size="5" />
-                  <a-descriptions :column="{ xs: 1, md: 2, lg: 3 }">
-                    <a-descriptions-item label="通过次数">
-                      {{ question.acceptNum ?? 0 }}
-                    </a-descriptions-item>
-                    <a-descriptions-item label="提交次数">
-                      {{ question.submitNum ?? 0 }}
-                    </a-descriptions-item>
-                    <a-descriptions-item label="通过率">
-                      {{
-                        (
-                          (question.acceptNum / question.submitNum) * 100 || 0
-                        ).toFixed(2) + "%" ?? 0
-                      }}
-                    </a-descriptions-item>
-                  </a-descriptions>
-                  <template #extra>
-                    <a-space wrap>
-                      <a-tag
-                        v-for="(tag, index) of question.tags"
-                        :key="index"
-                        color="green"
-                        >{{ tag }}
-                      </a-tag>
-                    </a-space>
+  <a-layout-content class="content">
+    <div id="solveQuestionView">
+      <a-split
+        :style="{
+          height: '86vh',
+          top: '50px',
+          bottom: '15px',
+          width: '100%',
+          minWidth: '500px',
+          border: '1px solid var(--color-border)',
+          paddingTop: '5px',
+          paddingLeft: '5px',
+        }"
+      >
+        <template #first>
+          <a-typography-paragraph>
+            <!--题目描述框-->
+            <a-col :md="36" :xs="48">
+              <a-tabs
+                default-active-key="question"
+                type="card-gutter"
+                :editable="false"
+                @add="handleAdd"
+                @delete="handleDelete"
+                show-add-button
+                auto-switch
+              >
+                <a-tab-pane key="question">
+                  <template #title>
+                    <icon-font type="icon-des" /> 题目描述
                   </template>
-                </a-card>
-              </a-tab-pane>
-              <a-tab-pane key="comment">
-                <template #title>
-                  <icon-font type="icon-history" /> 提交记录
-                </template>
-                TODO://查看提交记录
-              </a-tab-pane>
-              <a-tab-pane key="answer">
-                <template #title>
-                  <icon-font type="icon-answer" /> 查看题解
-                </template>
-                暂时无法查看答案
-              </a-tab-pane>
-            </a-tabs>
-          </a-col>
-        </a-typography-paragraph>
-      </template>
-      <template #second>
-        <div>
-          <a-split direction="vertical" :style="{ height: '85vh' }">
-            <template #first
-              ><a-typography-paragraph>
-                <a-col :md="48" :xs="72">
-                  <a-form :model="submitForm" layout="inline">
-                    <a-form-item>
-                      <a-select
-                        v-model="submitForm.language"
-                        style="background-color: #f7f8fa"
-                        placeholder="选择编程语言"
-                      >
-                        <a-option>java</a-option>
-                        <a-option>cpp</a-option>
-                      </a-select>
-                    </a-form-item>
-                  </a-form>
-                  <CodeEditor
-                    :value="submitForm.code"
-                    :language="submitForm.language"
-                    :handle-change="changeCode"
-                  />
-                  <a-divider size="0" />
-                </a-col>
-              </a-typography-paragraph>
-            </template>
-            <template #second>
-              <a-typography-paragraph style="padding: 5px">
-                <!--题目描述框-->
-                <a-col :md="36" :xs="48">
-                  <a-tabs default-active-key="question">
-                    <a-tab-pane key="question">
-                      <template #title>
-                        <icon-font type="icon-test" /> 测试用例
-                      </template>
-                    </a-tab-pane>
-                    <a-tab-pane key="comment">
-                      <template #title>
-                        <icon-font type="icon-run" /> 执行结果
-                      </template>
-                      <div
-                        style="
-                          color: #3c3c4399;
-                          display: flex;
-                          align-items: center;
-                          justify-content: center;
-                          margin-top: 90px;
-                        "
-                      >
-                        请先执行代码
-                      </div>
-                    </a-tab-pane>
-                  </a-tabs>
-                </a-col>
-              </a-typography-paragraph>
-            </template>
-          </a-split>
-        </div>
-      </template>
-    </a-split>
-  </div>
+                  <a-card v-if="question" :title="question.title">
+                    <a-descriptions
+                      title="判题条件"
+                      :column="{ xs: 1, md: 2, lg: 3 }"
+                    >
+                      <a-descriptions-item label="时间限制">
+                        {{ question.judgeConfig.timeLimit ?? 0 }}
+                      </a-descriptions-item>
+                      <a-descriptions-item label="内存限制">
+                        {{ question.judgeConfig.memoryLimit ?? 0 }}
+                      </a-descriptions-item>
+                      <a-descriptions-item label="堆栈限制">
+                        {{ question.judgeConfig.stackLimit ?? 0 }}
+                      </a-descriptions-item>
+                    </a-descriptions>
+                    <MdViewer :value="question.content || ''" />
+                    <a-divider size="5" />
+                    <a-descriptions :column="{ xs: 1, md: 2, lg: 3 }">
+                      <a-descriptions-item label="通过次数">
+                        {{ question.acceptNum ?? 0 }}
+                      </a-descriptions-item>
+                      <a-descriptions-item label="提交次数">
+                        {{ question.submitNum ?? 0 }}
+                      </a-descriptions-item>
+                      <a-descriptions-item label="通过率">
+                        {{
+                          (
+                            (question.acceptNum / question.submitNum) * 100 || 0
+                          ).toFixed(2) + "%" ?? 0
+                        }}
+                      </a-descriptions-item>
+                    </a-descriptions>
+                    <template #extra>
+                      <a-space wrap>
+                        <a-tag
+                          v-for="(tag, index) of question.tags"
+                          :key="index"
+                          color="green"
+                          >{{ tag }}
+                        </a-tag>
+                      </a-space>
+                    </template>
+                  </a-card>
+                </a-tab-pane>
+                <a-tab-pane key="comment">
+                  <template #title>
+                    <icon-font type="icon-history" /> 提交记录
+                  </template>
+                  TODO://查看提交记录
+                </a-tab-pane>
+                <a-tab-pane key="answer">
+                  <template #title>
+                    <icon-font type="icon-answer" /> 查看题解
+                  </template>
+                  暂时无法查看答案
+                </a-tab-pane>
+              </a-tabs>
+            </a-col>
+          </a-typography-paragraph>
+        </template>
+        <template #second>
+          <div>
+            <a-split direction="vertical" :style="{ height: '85vh' }">
+              <template #first
+                ><a-typography-paragraph>
+                  <a-col :md="48" :xs="72">
+                    <a-form :model="submitForm" layout="inline">
+                      <a-form-item>
+                        <a-select
+                          v-model="submitForm.language"
+                          style="background-color: #f7f8fa"
+                          placeholder="选择编程语言"
+                        >
+                          <a-option>java</a-option>
+                          <a-option>cpp</a-option>
+                        </a-select>
+                      </a-form-item>
+                    </a-form>
+                    <CodeEditor
+                      :value="submitForm.code"
+                      :language="submitForm.language"
+                      :handle-change="changeCode"
+                    />
+                    <a-divider size="0" />
+                  </a-col>
+                </a-typography-paragraph>
+              </template>
+              <template #second>
+                <a-typography-paragraph style="padding: 5px">
+                  <!--题目描述框-->
+                  <a-col :md="36" :xs="48">
+                    <a-tabs default-active-key="question">
+                      <a-tab-pane key="question">
+                        <template #title>
+                          <icon-font type="icon-test" /> 测试用例
+                        </template>
+                        <a-form :model="form">
+                          <a-form-item
+                            v-for="(judgeCaseItem, index) of form.judgeCase"
+                            :key="index"
+                            no-style
+                          >
+                            <a-space
+                              direction="vertical"
+                              style="min-width: 640px"
+                            >
+                              <a-form-item
+                                :field="`form.judgeCase[${index}].input`"
+                                :label="`输入用例${index}:`"
+                                :key="index"
+                              >
+                                <a-input
+                                  v-model="judgeCaseItem.input"
+                                  placeholder="请输入测试输入用例"
+                                />
+                              </a-form-item>
+                              <a-form-item
+                                :field="`form.judgeCase[${index}].output`"
+                                :label="`输出用例${index}:`"
+                                :key="index"
+                              >
+                                <a-input
+                                  v-model="judgeCaseItem.output"
+                                  placeholder="请输入测试输出用例"
+                                />
+                              </a-form-item>
+                              <a-button
+                                status="danger"
+                                style="width: 100px"
+                                @click="handleDelete(index)"
+                              >
+                                删除
+                              </a-button>
+                            </a-space>
+                          </a-form-item>
+                          <div style="margin-top: 16px" />
+                          <a-col direction="horizontal">
+                            <a-button
+                              @click="handleAdd"
+                              type="outline"
+                              style="width: 100px"
+                              status="success"
+                              >新增
+                            </a-button>
+                            <a-button
+                              type="primary"
+                              @click="doJudgeCaseSubmit"
+                              style="width: 100px"
+                              >提交
+                            </a-button>
+                          </a-col>
+                        </a-form>
+                      </a-tab-pane>
+                      <a-tab-pane key="comment">
+                        <template #title>
+                          <icon-font type="icon-run" /> 执行结果
+                        </template>
+                        <div
+                          style="
+                            color: #3c3c4399;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            margin-top: 90px;
+                          "
+                        >
+                          请先执行代码
+                        </div>
+                      </a-tab-pane>
+                    </a-tabs>
+                  </a-col>
+                </a-typography-paragraph>
+              </template>
+            </a-split>
+          </div>
+        </template>
+      </a-split>
+    </div>
+  </a-layout-content>
+  <a-layout-footer class="footer">
+    <a href="https://wl2o2o.github.io" target="_blank"> SmartOJ By CSGUIDER </a>
+  </a-layout-footer>
 </template>
 
 <script setup lang="ts">
@@ -286,6 +347,99 @@
 //     console.error("Error fetching question IDs:", error);
 //   }
 // };
+
+// 增加输入用例框
+let form = ref({
+  title: "",
+  tags: [],
+  difficulty: "",
+  answer: "",
+  content: "",
+  judgeConfig: {
+    memoryLimit: 1000,
+    stackLimit: 1000,
+    timeLimit: 1000,
+  },
+  judgeCase: [
+    {
+      input: "",
+      output: "",
+    },
+  ],
+});
+
+/**
+ * 根据题目 id 获取老的数据
+ */
+const loadJudgeCaseData = async () => {
+  const id = route.query.id;
+  if (!id) {
+    return;
+  }
+  const res = await QuestionControllerService.getQuestionByIdUsingGet(
+    id as any
+  );
+  if (res.code === 0) {
+    form.value = res.data as any;
+    // json 转 js 对象
+    if (!form.value.judgeCase) {
+      form.value.judgeCase = [
+        {
+          input: "",
+          output: "",
+        },
+      ];
+    } else {
+      form.value.judgeCase = JSON.parse(form.value.judgeCase as any);
+    }
+    if (!form.value.judgeConfig) {
+      form.value.judgeConfig = {
+        memoryLimit: 1000,
+        stackLimit: 1000,
+        timeLimit: 1000,
+      };
+    } else {
+      form.value.judgeConfig = JSON.parse(form.value.judgeConfig as any);
+    }
+    if (!form.value.tags) {
+      form.value.tags = [];
+    } else {
+      form.value.tags = JSON.parse(form.value.tags as any);
+    }
+  } else {
+    message.error("加载失败，" + res.message);
+  }
+};
+
+const doJudgeCaseSubmit = async () => {
+  console.log(form.value);
+  const res = await QuestionControllerService.updateQuestionUsingPost(
+    form.value
+  );
+  if (res.code === 0) {
+    message.success("增加用例成功");
+  } else {
+    message.error("增加用例失败，" + res.message);
+  }
+};
+
+/**
+ * 新增判题用例
+ */
+const handleAdd = () => {
+  form.value.judgeCase.push({
+    input: "",
+    output: "",
+  });
+};
+
+/**
+ * 删除判题用例
+ */
+const handleDelete = (index: number) => {
+  form.value.judgeCase.splice(index, 1);
+};
+
 import * as path from "path";
 const route = useRoute();
 // const questionIds = ref<number[]>([]);
@@ -301,15 +455,15 @@ const loadingIdsData = async () => {
 
     // 从 response.data 中获取 ID 列表
     const ids = response.data;
-    console.log("转换前：");
-    console.log(ids);
+    // console.log("转换前：");
+    // console.log(ids);
 
     // 将 ids 数组的元素转换为数字
     const idsAsNumbers = ids.map(Number);
 
     questionIds = idsAsNumbers;
-    console.log("转换后：");
-    console.log(idsAsNumbers);
+    // console.log("转换后：");
+    // console.log(idsAsNumbers);
 
     // 找到当前题目的索引并赋值给 questionIndex
     questionIndex = idsAsNumbers.findIndex((id) => id === questionId);
@@ -483,8 +637,13 @@ const props = withDefaults(defineProps<Props>(), {
 const question = ref<QuestionVO>();
 
 const loadData = async () => {
+  const id = route.query.id;
+  if (!id) {
+    return;
+  }
   const resouse = await QuestionControllerService.getQuestionVoByIdUsingGet(
-    props.id as any
+    id as any
+    // props.id as any
   );
   if (resouse.code === 0) {
     question.value = resouse.data;
@@ -541,6 +700,7 @@ onMounted(() => {
   // loadTestData();
   loadData();
   loadingIdsData();
+  loadJudgeCaseData();
 });
 
 /**
@@ -576,5 +736,22 @@ const changeCode = (value: string) => {
   line-height: 40px;
   color: #00a54a;
   margin: auto 8px;
+}
+
+.content {
+  background: linear-gradient(to right, #fefefe, #fff);
+  margin-top: 48px;
+  margin-bottom: 15px;
+  padding: 20px;
+}
+
+.footer {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  padding: 15px;
+  text-align: center;
+  background: #efefef;
 }
 </style>

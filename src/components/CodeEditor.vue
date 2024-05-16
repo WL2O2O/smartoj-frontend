@@ -23,8 +23,20 @@ interface Props {
 /**
  * 给组件指定初始值
  */
+// const props = withDefaults(defineProps<Props>(), {
+//   value: () => "",
+//   language: () => "java",
+//   handleChange: (v: string) => {
+//     console.log(v);
+//   },
+// });
+
 const props = withDefaults(defineProps<Props>(), {
-  value: () => "",
+  value: () => `public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}`,
   language: () => "java",
   handleChange: (v: string) => {
     console.log(v);
@@ -63,6 +75,7 @@ onMounted(() => {
     value: props.value,
     language: props.language,
     automaticLayout: true,
+
     colorDecorators: true,
     minimap: {
       enabled: true,

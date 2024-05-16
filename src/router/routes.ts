@@ -94,19 +94,30 @@ export const routes: Array<RouteRecordRaw> = [
       hideInMenu: true,
     },
   },
+  // {
+  //   path: "/view/question",
+  //   name: "在线做题",
+  //   component: ViewQuestionLayout,
+  //   children: [
+  //     {
+  //       path: "/view/question/:id",
+  //       name: "在线做题",
+  //       // component: ViewQuestionView,
+  //       component: SolveQuestionView,
+  //       props: true,
+  //     },
+  //   ],
+  //   meta: {
+  //     access: ACCESS_ENUM.USER,
+  //     hideInMenu: true,
+  //   },
+  // },
   {
     path: "/view/question",
     name: "在线做题",
-    component: ViewQuestionLayout,
-    children: [
-      {
-        path: "/view/question/:id",
-        name: "在线做题",
-        // component: ViewQuestionView,
-        component: SolveQuestionView,
-        props: true,
-      },
-    ],
+    // component: ViewQuestionView,
+    component: SolveQuestionView,
+    props: true,
     meta: {
       access: ACCESS_ENUM.USER,
       hideInMenu: true,

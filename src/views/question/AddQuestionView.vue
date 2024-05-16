@@ -11,7 +11,8 @@
       <a-form-item field="difficulty" label="难度">
         <a-input
           v-model="form.difficulty"
-          placeholder="请输入难度级别（简单、中等、困难）"
+          placeholder="请输入难度级别"
+          allow-clear
         />
       </a-form-item>
       <a-form-item field="content" label="题目内容">

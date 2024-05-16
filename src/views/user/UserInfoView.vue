@@ -71,19 +71,24 @@ onMounted(() => {
 
   console.log(myChart);
 
-  const getVirtualData = (year) => {
-    const date = +echarts.time.parse(year + "-01-01");
-    const end = +echarts.time.parse(+year + 1 + "-01-01");
-    const dayTime = 3600 * 24 * 1000;
-    const data = [];
-    for (let time = date; time < end; time += dayTime) {
-      data.push([
-        echarts.time.format(time, "{yyyy}-{MM}-{dd}", false),
-        Math.floor(Math.random() * 10000),
-      ]);
-    }
-    return data;
-  };
+  // const getVirtualData = (year) => {
+  //   const date = +echarts.time.parse(year + "-01-01");
+  //   const end = +echarts.time.parse(+year + 1 + "-01-01");
+  //   const dayTime = 3600 * 24 * 1000;
+  //   const data = [];
+  //   for (let time = date; time < end; time += dayTime) {
+  //     data.push([
+  //       echarts.time.format(time, "{yyyy}-{MM}-{dd}", false),
+  //       Math.floor(Math.random() * 10000),
+  //     ]);
+  //   }
+  //   return data;
+  // };
+  const customData = [
+    ["2024-05-13", 2], // 自定义数据点1
+    ["2024-05-14", 2], // 自定义数据点2
+  ];
+
   option = {
     title: {
       top: 30,
@@ -113,7 +118,8 @@ onMounted(() => {
     series: {
       type: "heatmap",
       coordinateSystem: "calendar",
-      data: getVirtualData("2016"),
+      // data: getVirtualData("2024"),
+      data: customData, // 使用自定义数据
     },
   };
 

@@ -16,7 +16,7 @@
       </a-layout-content>
       <a-layout-footer class="footer">
         <a
-          href="https://wlei224.gitee.io"
+          href="https://wl2o2o.github.io"
           target="_blank"
           style="color: #eeeeee"
         >

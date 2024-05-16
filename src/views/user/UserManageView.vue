@@ -62,10 +62,6 @@
       <template #updateTime="{ record }">
         {{ moment(record.updateTime).format("YYYY-MM-DD HH:mm:ss") }}
       </template>
-      <template #userState="{ record }">
-        <a-tag v-if="record.userState === '正常'" color="blue">正常</a-tag>
-        <a-tag v-if="record.userState === '封号'" color="red">封号</a-tag>
-      </template>
       <template #optional="{ record }">
         <a-space>
           <a-button

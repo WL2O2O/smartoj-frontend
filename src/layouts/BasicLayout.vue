@@ -8,7 +8,7 @@
         <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">
-        <a href="https://wlei224.gitee.io" target="_blank">
+        <a href="https://wl2o2o.github.io" target="_blank">
           SmartOJ By CSGUIDER
         </a>
       </a-layout-footer>

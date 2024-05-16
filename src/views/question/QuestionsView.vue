@@ -12,7 +12,7 @@
         <a-input-tag v-model="searchParams.tags" placeholder="输入后回车确认" />
       </a-form-item>
       <a-form-item field="difficulty" label="难度" style="min-width: 180px">
-        <a-input-tag
+        <a-input
           v-model="searchParams.difficulty"
           placeholder="请输入难度级别"
         />
@@ -177,7 +177,7 @@ onMounted(() => {
 
   optionRadar = {
     legend: {
-      data: ["Allocated Budget", "Actual Spending"],
+      data: ["已做题数"],
       // 垂直显示 || 水平显示
       orient: "vertical",
       top: "45%",
@@ -187,12 +187,12 @@ onMounted(() => {
     radar: {
       // shape: "circle",
       indicator: [
-        { name: "Sales", max: 6500 },
-        { name: "Administration", max: 16000 },
-        { name: "Information Technology", max: 30000 },
-        { name: "Customer Support", max: 38000 },
-        { name: "Development", max: 52000 },
-        { name: "Marketing", max: 25000 },
+        { name: "数组", max: 2 },
+        { name: "链表", max: 50 },
+        { name: "栈", max: 50 },
+        { name: "哈希表", max: 50 },
+        { name: "队列", max: 50 },
+        { name: "数学", max: 1 },
       ],
     },
     series: [
@@ -201,12 +201,8 @@ onMounted(() => {
         type: "radar",
         data: [
           {
-            value: [4200, 3000, 20000, 35000, 50000, 18000],
-            name: "Allocated Budget",
-          },
-          {
-            value: [5000, 14000, 28000, 26000, 42000, 21000],
-            name: "Actual Spending",
+            value: [2, 0, 0, 0, 0, 1],
+            name: "已做题数",
           },
         ],
       },
@@ -215,7 +211,7 @@ onMounted(() => {
 
   optionRadar && myRadarChart.setOption(optionRadar);
 
-  // 这是ECharts图表
+  // 这是刷题进度图表
   var chartDom = echartsContainer.value;
   var myChart = echarts.init(chartDom);
   var option;
@@ -311,9 +307,9 @@ onMounted(() => {
     ],
   };
   setInterval(function () {
-    gaugeData[0].value = +(0.1 * 100).toFixed(2);
-    gaugeData[1].value = +(0.2 * 100).toFixed(2);
-    gaugeData[2].value = +(0.3 * 100).toFixed(2);
+    gaugeData[0].value = +(0.6 * 100).toFixed(2);
+    gaugeData[1].value = +(0.5 * 100).toFixed(2);
+    gaugeData[2].value = +(0.0 * 100).toFixed(2);
     myChart.setOption({
       series: [
         {
@@ -428,9 +424,17 @@ const router = useRouter();
  * 跳转到做题页面
  * @param question
  */
+// const toQuestionPage = (question: Question) => {
+//   router.push({
+//     path: `/view/question/${question.id}`,
+//   });
+// };
 const toQuestionPage = (question: Question) => {
   router.push({
-    path: `/view/question/${question.id}`,
+    path: "/view/question",
+    query: {
+      id: question.id,
+    },
   });
 };
 
